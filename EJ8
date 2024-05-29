@@ -1,3 +1,4 @@
+/* 8. Realizar una función que calcule la suma de la diagonal secundaria */
 #include <iostream>
 #include <math.h>
 #define K 4
