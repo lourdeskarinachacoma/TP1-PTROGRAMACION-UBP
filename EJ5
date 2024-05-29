@@ -1,0 +1,146 @@
+#include <iostream>
+#include <math.h>
+#define K 4
+#define L 4
+
+using namespace std;
+void imprimir(int m[K][L]);
+int punto1(int m[K][L]);
+int punto2(int m[K][L]);
+void punto3 (int m[K][L]);
+void punto4(int m[K][L]);
+void punto5(int m[K][L]);
+
+int main()
+{
+	
+	int matriz [K][L]={0};
+	for(int k=0;k<K;k++){
+		
+		for(int l=0;l<L;l++)
+		{
+			cout<<"Cargando valor en posicion ("<<k<<","<<l<<")"<<endl;
+			cin>>matriz[k][l];
+		}
+	}
+	cout<<endl;
+	imprimir(matriz);
+	cout<<endl;
+	cout<<"el mayor numero ingresado a la matriz es: "<<punto1(matriz)<<endl;
+	cout<<"el menor numero ingresado a la matriz es: "<<punto2(matriz)<<endl;
+	punto3(matriz);
+	
+}
+void imprimir (int m[K][L])
+{
+	for(int k=0;k<K;k++){
+		
+		for(int l=0;l<L;l++)
+		{
+			cout<<m[k][l]<<"	";
+		}              
+		 cout<<endl;
+	}          
+		
+}
+
+int punto1(int m[K][L])
+{
+	int mayor=0;
+	for(int k=0;k<K;k++){
+		
+		for(int l=0;l<L;l++)
+		{
+			
+			if(m[k][l] > mayor)
+			{
+				mayor=m[k][l];
+			}
+			
+		}
+	}
+	return mayor;
+}
+
+int punto2(int m[K][L])
+{
+	int menor=999999;
+	for(int k=0;k<K;k++){
+		
+		for(int l=0;l<L;l++)
+		{
+			
+			if(m[k][l] < menor)
+			{
+				menor=m[k][l];
+			}
+			
+		}
+	}
+	return menor;
+}
+
+void punto3 (int m[K][L]){
+	int v[K]={0};
+	int suma=0;
+	
+	for(int k=0;k<K;k++){
+		
+		for(int l=0;l<L;l++)
+		{
+			
+			suma+=m[k][l];
+		}
+		v[k]=suma;
+	}
+	cout<<"suma de las filas en el vector"<<endl;
+	for(int k=0;k<K;k++)
+	{
+		cout<<v[k]<<endl;
+	}
+}
+void punto4(int m[K][L])
+{
+	int n[K][L]={0};
+	
+	for(int k=0;k<K;k++){
+		
+		for(int l=0;l<L;l++)
+		{
+			
+		n[k][l]=pow(m[k][l],2);
+		}
+		
+	}
+	cout<<"matriz original"<<endl;
+	imprimir(m);
+	cout<<"Matriz elevada"<<endl;
+	imprimir(n);
+	
+}
+
+void punto5(int m[K][L])
+{
+	int v[K*L]={0};
+	int c=0, n=0;
+	cout <<"Ingrese un valor entero "<<endl;
+	cin>>n;
+		for(int k=0;k<K;k++){
+		
+		for(int l=0;l<L;l++)
+		{
+			
+			if(m[k][l]<n){
+				v[c]=m[k][l];
+				c++;
+			}
+		}
+		
+	}
+	imprimir(m);
+	cout<<"Numeros menores que "<<n<<endl;
+	for(int k=0;k<c;k++){
+		cout<<v[k]<<endl;
+	}
+	
+}
