@@ -1,3 +1,7 @@
+/* 9. Crear una matriz de N elementos a partir de la matriz original teniendo en cuenta el siguiente criterio: 
+Los valores positivos pasan directamente a la segunda matriz
+Los valores negativos se reemplazan por 0. 
+Los valores cero se reemplazan por –1 */
 #include <iostream>
 #include <math.h>
 #define K 4
