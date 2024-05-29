@@ -160,7 +160,7 @@ void punto6(int m[K][L])
 	}          
 }
 
-int punto(int m[K][L])
+int punto7(int m[K][L])
 {
 	int s=0;
 	for(int k=0;k<K;k++){
