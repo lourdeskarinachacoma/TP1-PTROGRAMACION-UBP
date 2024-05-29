@@ -1,3 +1,4 @@
+/* 6. Realizar una función realice la transpuesta de la matriz */
 #include <iostream>
 #include <math.h>
 #define K 4
