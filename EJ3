@@ -1,3 +1,4 @@
+/* 3. Realizar una función que almacene en un arreglo la suma de cada fila de la matriz */
 #include <iostream>
 #include <math.h>
 #define K 4
