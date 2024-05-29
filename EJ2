@@ -1,0 +1,34 @@
+#include <iostream>
+#define K 4
+#define L 4
+using namespace std;
+int menor (int m[K][L]); 
+
+int main ()
+   { 
+       int matriz [K][L]={0};
+       for (int k=0;k<K;k++) {
+           for (int l=0;l<L;l++)
+           {
+               cout << "Cargando el valor en posicion ("<<k<<","<<l<<") " <<endl;
+               cin>>matriz [k][l];
+           }
+    }
+    cout<<"El menor numero ingresado a la matriz es:" <<menor(matriz) <<endl;
+    return 0; 
+   }
+   int menor (int m[K][L])
+   {
+       int menor=999999999;
+       for (int k=0;k<K;k++) { 
+           for (int l=0;l<L;l++)
+           { 
+               if (m[k][l]<menor)
+               {
+                   menor = m [k] [l];
+               }
+           }
+           
+       } 
+     return menor;
+   }
