@@ -1,3 +1,4 @@
+/* 4. Realizar una función que permita crear una matriz de N elementos a partir de la matriz original  con los cuadrados de cada elemento */
 #include <iostream>
 #include <math.h>
 #define K 4
