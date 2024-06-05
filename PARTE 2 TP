@@ -1,0 +1,239 @@
+/* 1. Una empresa decide realizar el control de las ventas realizadas en el último año. El
+detalle de información con el que se cuenta es el siguiente:
+Número de Venta (Número)
+Producto (Texto)
+Cantidad (Número)
+Precio Unitario (Número)
+Descuento Aplicado (Número)
+Período (Número)
+Estado Venta (V - Vigente; A - Anulado )
+Se pide crear un programa C++ que permita, mediante un menú realizar las
+siguientes operaciones:
+1. Carga de las ventas realizadas por período
+2. Buscar una venta y mostrar los datos de la misma en forma individual.
+3. Anular una venta
+4. Calcular la Cantidad de Ventas realizadas en un período determinado.
+5. Calcular el monto total de las ventas realizadas en un período determinado
+6. Mostrar las tres ventas de mayor monto.
+7. Mostrar las ventas ordenadas de mayor a menor según monto total de la
+venta
+8. Mostrar detalle de ventas ANULADAS
+Consideraciones
+Consigna 1: Se debe realizar la carga de al menos 10 ventas.
+Consigna 2: Utilizar un método de búsqueda (Secuencial o Binario)
+Consigna 3: La anulación consiste en buscar una venta determinada y cambiar su estado a
+A (Anulado)
+Consigna 4: Para el cálculo se deben considerar solo las ventas No Anuladas.
+Consigna 5: Para el cálculo se deben considerar solo las ventas No Anuladas.
+Consigna 6: Para el cálculo se deben considerar solo las ventas No Anuladas.
+Consigna 7: Aplicar método de ordenamiento
+Consigna 8: Mostrar las ventas anuladas
+Consigna 9: Listar las ventas anuladas mostrando todos sus datos.
+Desarrollar la solución de cada consigna mediante funciones
+El programa deba compilar
+Desarrollo grupal, evaluación individual /*
+
+#include <stdio.h>
+#include <iostream>
+#include <conio.h>
+#define N 10
+
+using namespace std;
+
+
+struct Venta {
+	int nventa;
+	string producto;
+	int cantidad;
+	float precio;
+	float descuento;
+	// lo periodos son los meses denotados con su equivalente en numeros
+	int periodo;
+	//estado true = vigente; estado false = anulado
+	bool estado;
+	float total;
+	
+};
+
+void cargar_venta(Venta v[N],int cont);
+void imprimir_todos(Venta v[N], int cont);
+void mes(int m);
+int main () 
+{
+	Venta v[N];
+	char op ='1';
+	int cont=0;
+	
+	while(op!=0)
+	{
+		system("cls");
+		cout<<"1.-Cargar una Venta"<<endl;
+		cout<<"2.-Buscar una Venta"<<endl;
+		cout<<"3.-Anular una Venta"<<endl;
+		cout<<"4.-Ventas por periodo"<<endl;
+		cout<<"5.-Total de ventas por periodo"<<endl;
+		cout<<"6.-3 ventas de mayor monto"<<endl;
+		cout<<"7.-Ventas ordenas por monto mayor a menor"<<endl;
+		cout<<"8.-Detalles de ventas Anuladas"<<endl;
+		cout<<"9.-Imprimir todas las ventas"<<endl;
+		cout<<"0.-Salir"<<endl;
+		op=getch();
+		
+		switch(op){
+			case '1':
+				cargar_venta(v,cont);
+				cont++;
+				system("pause");
+			break;
+case '7':
+				
+			break;
+			
+			case '9':
+				imprimir_todos(v,cont);
+			break;
+			
+			case '0':
+				exit(0);
+			break;
+			default:
+				cout<<"Opcion invalida"<<endl;
+			break;			
+		}
+	}//fin del while
+	
+	return 0;
+}
+void cargar_venta(Venta v[N],int cont)
+{
+	char d;
+	int op=1;
+	
+	cout<<"Ingrese id venta"<<endl;
+	cin>>v[cont].nventa;	
+	cout<<"Ingrese El Nombre del producto"<<endl;
+	cin>>v[cont].producto;
+	cout<<"Ingrese cantidad"<<endl;
+	cin>>v[cont].cantidad; 
+cout<<"Ingrese Precio"<<endl;
+	cin>>v[cont].precio;
+	cout<<"Tiene descuento? y (si) n (no)"<<endl;
+	d=getch();
+	if(d=='y')
+	{
+		cout<<"Ingrese descuento"<<endl;
+		cin>>v[cont].descuento;
+	}
+	else{v[cont].descuento=0;}
+	do{
+		if(op<=0 || op>12)
+		{
+			cout<<"Opcion invalida"<<endl;
+			cout<<"nos seas pelotudo hay solo 12 meses"<<endl;
+		}
+		cout<<"1.-Enero"<<endl;
+		cout<<"2.-Febrero"<<endl;
+		cout<<"3.-Marzo"<<endl;
+		cout<<"4.-Abril"<<endl;
+		cout<<"5.-Mayo"<<endl;
+		cout<<"6.-Junio"<<endl;
+		cout<<"7.-Julio"<<endl;
+		cout<<"8.-Agosto"<<endl;
+		cout<<"9.-Septiembre"<<endl;
+		cout<<"10.-Octubre"<<endl;
+		cout<<"11.-Nobiembre"<<endl;
+		cout<<"12.-Diciembre"<<endl;
+		
+		cin>>op;
+		v[cont].periodo=op;
+		
+		
+	}while(op<=0 || op>12);
+	if(v[cont].descuento!=0)
+	{
+	v[cont].total=v[cont].precio-(v[cont].precio*(v[cont].descuento/100));	
+	}
+	else{
+		v[cont].total=v[cont].precio;
+	}
+	if(v[cont].cantidad>1)
+	{
+		v[cont].total*=v[cont].cantidad;
+	}
+	
+	v[cont].estado=true;
+	cout<<"Total a pagar"<<endl;
+	cout<<v[cont].total<<endl;
+	
+	
+	system("pause");
+	
+}
+
+void imprimir_todos(Venta v[N], int cont)
+{
+	for(int i=0;i<cont;i++)
+	{
+		cout<<"Id producto "<<v[i].nventa<<endl;
+	
+		cout<<"Nombre producto "<<v[i].producto<<endl;
+		
+		cout<<"Cantidad"<<v[i].cantidad<<endl;
+		
+		cout<<"Descuento "<<v[i].descuento<<"% "<<endl;
+		
+		cout<<"Periodo"<<endl;
+		mes(v[i].periodo);
+		cout<<"Estado"<<endl;
+		if(v[i].estado){cout<<"Vigente"<<endl;}
+		else{cout<<"Anulado"<<endl;}
+		cout<<"Total a pagar "<<v[i].total<<endl;
+		
+	}
+	system("pause");
+}
+void mes(int m){
+	switch(m){
+		case 1: cout<<"Enero"<<endl; break;
+		case 2: cout<<"Febrero"<<endl; break;
+		case 3: cout<<"Marzo"<<endl; break;
+		case 4: cout<<"Abril"<<endl; break;
+		case 5: cout<<"Mayo"<<endl; break;
+		case 6: cout<<"Junio"<<endl; break;
+		case 7: cout<<"Julio"<<endl; break;
+		case 8: cout<<"Agosto"<<endl; break;
+		case 9: cout<<"Septiembre"<<endl; break;
+		case 10: cout<<"Octubre"<<endl; break;
+		case 11: cout<<"Nobiembre"<<endl; break;
+		case 12: cout<<"Diciembre"<<endl; break;
+	}
+}
+void ordenar_ventas(Venta v[N],int cont)
+{
+	Venta aux;
+	
+	for(int i=0;i<cont;i++)
+	{
+		
+		if(i==cont-1){
+		}
+		else
+		{if(v[i].total<v[i+1].total)
+		{
+			aux.nventa=v[i].nventa;
+			aux.producto=v[i].producto;
+			aux.cantidad=v[i].cantidad;
+			aux.precio=v[i].precio;
+			aux.descuento=v[i].descuento;
+			aux.periodo=v[i].periodo
+			aux.estado=v[i].estado;
+			aux.total=v[i].total;
+
+		}
+		}
+		
+		
+			
+	}
+}
+
