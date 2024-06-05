@@ -1,3 +1,4 @@
+
 /* 1. Una empresa decide realizar el control de las ventas realizadas en el último año. El
 detalle de información con el que se cuenta es el siguiente:
 Número de Venta (Número)
@@ -35,7 +36,8 @@ Desarrollo grupal, evaluación individual */
 
 #include <stdio.h>
 #include <iostream>
-#define N 5
+#include <conio.h>
+#define N 10
 
 using namespace std;
 
@@ -44,9 +46,9 @@ struct Venta {
 	int nventa;
 	string producto;
 	int cantidad;
-	float precio_u;
-	float des_ap;
-	// los periodos son los meses denotados con su equivalente en numeros
+	float precio;
+	float descuento;
+	// lo periodos son los meses denotados con su equivalente en numeros
 	int periodo;
 	//estado true = vigente; estado false = anulado
 	bool estado;
@@ -59,7 +61,7 @@ void imprimir_todos(Venta v[N], int cont);
 void mes(int m);
 int main () 
 {
-	Ventas v[N];
+	Venta v[N];
 	char op ='1';
 	int cont=0;
 	
@@ -72,7 +74,7 @@ int main ()
 		cout<<"4.-Ventas por periodo"<<endl;
 		cout<<"5.-Total de ventas por periodo"<<endl;
 		cout<<"6.-3 ventas de mayor monto"<<endl;
-		cout<<"7.-Ventas ordenadas por monto mayor al monto menor"<<endl;
+		cout<<"7.-Ventas ordenas por monto mayor a menor"<<endl;
 		cout<<"8.-Detalles de ventas Anuladas"<<endl;
 		cout<<"9.-Imprimir todas las ventas"<<endl;
 		cout<<"0.-Salir"<<endl;
@@ -110,25 +112,25 @@ void cargar_venta(Venta v[N],int cont)
 	
 	cout<<"Ingrese id venta"<<endl;
 	cin>>v[cont].nventa;	
-	cout<<"Ingrese el Nombre del producto"<<endl;
+	cout<<"Ingrese El Nombre del producto"<<endl;
 	cin>>v[cont].producto;
 	cout<<"Ingrese cantidad"<<endl;
 	cin>>v[cont].cantidad; 
 cout<<"Ingrese Precio"<<endl;
-	cin>>v[cont].precio_u;
+	cin>>v[cont].precio;
 	cout<<"Tiene descuento? y (si) n (no)"<<endl;
 	d=getch();
 	if(d=='y')
 	{
 		cout<<"Ingrese descuento"<<endl;
-		cin>>v[cont].des_ap;
+		cin>>v[cont].descuento;
 	}
-	else{v[cont].des_ap=0;}
+	else{v[cont].descuento=0;}
 	do{
 		if(op<=0 || op>12)
 		{
 			cout<<"Opcion invalida"<<endl;
-			cout<<"Limite 12 meses"<<endl;
+			cout<<"nos seas pelotudo hay solo 12 meses"<<endl;
 		}
 		cout<<"1.-Enero"<<endl;
 		cout<<"2.-Febrero"<<endl;
@@ -140,7 +142,7 @@ cout<<"Ingrese Precio"<<endl;
 		cout<<"8.-Agosto"<<endl;
 		cout<<"9.-Septiembre"<<endl;
 		cout<<"10.-Octubre"<<endl;
-		cout<<"11.-Noviembre"<<endl;
+		cout<<"11.-Nobiembre"<<endl;
 		cout<<"12.-Diciembre"<<endl;
 		
 		cin>>op;
@@ -153,7 +155,7 @@ cout<<"Ingrese Precio"<<endl;
 	v[cont].total=v[cont].precio-(v[cont].precio*(v[cont].descuento/100));	
 	}
 	else{
-		v[cont].total=v[cont].precio_u;
+		v[cont].total=v[cont].precio;
 	}
 	if(v[cont].cantidad>1)
 	{
@@ -179,7 +181,7 @@ void imprimir_todos(Venta v[N], int cont)
 		
 		cout<<"Cantidad"<<v[i].cantidad<<endl;
 		
-		cout<<"Descuento "<<v[i].des_ap<<"% "<<endl;
+		cout<<"Descuento "<<v[i].descuento<<"% "<<endl;
 		
 		cout<<"Periodo"<<endl;
 		mes(v[i].periodo);
@@ -203,7 +205,7 @@ void mes(int m){
 		case 8: cout<<"Agosto"<<endl; break;
 		case 9: cout<<"Septiembre"<<endl; break;
 		case 10: cout<<"Octubre"<<endl; break;
-		case 11: cout<<"Noviembre"<<endl; break;
+		case 11: cout<<"Nobiembre"<<endl; break;
 		case 12: cout<<"Diciembre"<<endl; break;
 	}
 }
@@ -222,9 +224,9 @@ void ordenar_ventas(Venta v[N],int cont)
 			aux.nventa=v[i].nventa;
 			aux.producto=v[i].producto;
 			aux.cantidad=v[i].cantidad;
-			aux.precio=v[i].precio_u;
-			aux.descuento=v[i].des_ap;
-			aux.periodo=v[i].periodo
+			aux.precio=v[i].precio;
+			aux.descuento=v[i].descuento;
+			aux.periodo=v[i].periodo;
 			aux.estado=v[i].estado;
 			aux.total=v[i].total;
 
@@ -235,4 +237,3 @@ void ordenar_ventas(Venta v[N],int cont)
 			
 	}
 }
-
